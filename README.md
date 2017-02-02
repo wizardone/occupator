@@ -20,8 +20,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Events are defined as POROs, responding to the method `call` or any
+other of your choosing. So you can have something like:
+```ruby
+class EventObject
+  include Occupator
 
+  def self.call
+    #perform any recurring action
+  end
+end
+```
+You can list all your events in a single file (or whatever you choose),
+where they can be evaluated during run time (a config file or an
+initializer in Rails will do the trick, for example)
+
+```ruby
+EventObject1.occupy(every: day)
+EventObject2.occupy(every: week)
+EventObject3.occupy(every: month)
+EventObject4.occupy(every: year)
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
