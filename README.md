@@ -1,6 +1,6 @@
 # Occupator
 
-Occupator is a gem, handling recurring events in Rails
+Occupator is a gem, handling recurring events in Ruby
 
 ## Installation
 

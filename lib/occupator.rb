@@ -1,5 +1,10 @@
 require "occupator/version"
 
 module Occupator
-  # Your code goes here...
+
+  class << self
+    def occupy(**options)
+      call
+    end
+  end
 end
