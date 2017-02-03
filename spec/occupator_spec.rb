@@ -3,22 +3,30 @@ require 'byebug'
 
 RSpec.describe Occupator do
   subject do
-    class EventObject
+    #class EventObject
+    #  extend Occupator
+    #  def kur; end
+    #end
+    EventObject = Class.new do
       extend Occupator
+      def self.call(*args)
+      end
     end
   end
+
   it "has a version number" do
     expect(Occupator::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
-  end
-
-
   describe 'Event Object' do
     it 'responds to the occupy method' do
       expect(subject).to respond_to(:occupy)
+    end
+
+    it 'invokes the callable method in the event class' do
+      expect(subject).to receive(:call).with(:day, '00.00')
+
+      subject.occupy(every: :day, at: '00.00')
     end
   end
 end
