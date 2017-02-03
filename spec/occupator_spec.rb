@@ -2,17 +2,14 @@ require "spec_helper"
 require 'byebug'
 
 RSpec.describe Occupator do
-  subject do
-    #class EventObject
-    #  extend Occupator
-    #  def kur; end
-    #end
-    EventObject = Class.new do
-      extend Occupator
-      def self.call(*args)
-      end
+
+  EventObject = Class.new do
+    extend Occupator
+    def self.call(*args)
     end
   end
+
+  subject { EventObject }
 
   it "has a version number" do
     expect(Occupator::VERSION).not_to be nil

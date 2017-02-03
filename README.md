@@ -36,10 +36,10 @@ where they can be evaluated during run time (a config file or an
 initializer in Rails will do the trick, for example)
 
 ```ruby
-EventObject1.occupy(every: day)
-EventObject2.occupy(every: week)
-EventObject3.occupy(every: month)
-EventObject4.occupy(every: year)
+EventObject1.occupy(every: :day)
+EventObject2.occupy(every: :week)
+EventObject3.occupy(every: :month)
+EventObject4.occupy(every: :year)
 ```
 ## Development
 
