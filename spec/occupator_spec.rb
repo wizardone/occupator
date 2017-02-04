@@ -19,7 +19,7 @@ RSpec.describe Occupator do
 
     describe '.config' do
       it 'returns a new config object' do
-        expect(Occupator.config).to be_a(Occupator::Config)
+        expect(Occupator.configuration).to be_a(Occupator::Config)
       end
 
       it 'returns the default config values' do

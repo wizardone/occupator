@@ -41,6 +41,14 @@ EventObject2.occupy(every: :week)
 EventObject3.occupy(every: :month)
 EventObject4.occupy(every: :year)
 ```
+
+You can configure the `Occupator` gem by using its config property:
+```ruby
+Occupator.configure do |config|
+  config.default_at = '06.00'
+  config.some_option = :blah
+end
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
