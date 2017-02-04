@@ -15,6 +15,31 @@ RSpec.describe Occupator do
     expect(Occupator::VERSION).not_to be nil
   end
 
+  describe Occupator::Config do
+
+    describe '.config' do
+      it 'returns a new config object' do
+        expect(Occupator.config).to be_a(Occupator::Config)
+      end
+
+      it 'returns the default config values' do
+        config = Occupator::Config.new
+
+        expect(config.default_at).to eq('12.00')
+      end
+    end
+
+    describe '.configure' do
+      it 'raises an error if no block is passed' do
+        expect { Occupator.configure }.to raise_error(RuntimeError)
+      end
+
+      it 'passes the config option to the config class' do
+        skip 'implement later'
+      end
+    end
+  end
+
   describe 'Event Object' do
     it 'responds to the occupy method' do
       expect(subject).to respond_to(:occupy)
