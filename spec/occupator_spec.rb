@@ -26,6 +26,7 @@ RSpec.describe Occupator do
         config = Occupator::Config.new
 
         expect(config.default_at).to eq('12.00')
+        expect(config.call_method).to eq(:call)
       end
     end
 
