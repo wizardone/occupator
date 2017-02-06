@@ -46,6 +46,7 @@ You can configure the `Occupator` gem by using its config property:
 ```ruby
 Occupator.configure do |config|
   config.default_at = '06.00'
+  config.call_method = :call
   config.some_option = :blah
 end
 ```
