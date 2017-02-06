@@ -4,23 +4,6 @@ require 'byebug'
 
 module Occupator
 
- # def self.included(base)
- #   base.extend ClassMethods
- # end
-
- # module ClassMethods
- #   attr_accessor :configuration
- #   def configuration
- #     configuration ||= Occupator::Config.new
- #   end
-
- #   def configure
- #     raise 'You must supply a block with config options' unless block_given?
-
- #     yield configuration
- #   end
- # end
-
   class << self
     attr_accessor :configuration
     def configuration
