@@ -1,5 +1,6 @@
-require "occupator/version"
-require "occupator/config"
+require 'occupator/version'
+require 'occupator/config'
+require 'occupator/event'
 require 'byebug'
 
 module Occupator
@@ -21,6 +22,10 @@ module Occupator
     every = options[:every] || :day
     at = options[:at] || '12.00'
     call_method = Occupator.configuration.call_method
+
+    Occupator::Event.new(every: every,
+                         at: at,
+                         method: call_method)
 
     public_send(call_method, every, at) if respond_to?(call_method)
   end
