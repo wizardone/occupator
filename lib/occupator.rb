@@ -21,7 +21,7 @@ module Occupator
   def occupy(**options)
     every = options[:every] || :day
     at = options[:at] || '12.00'
-    call_method = Occupator.configuration.call_method
+    call_method = Occupator.configuration.call_method || options[:method]
 
     Occupator::Event.new(every: every,
                          at: at,
