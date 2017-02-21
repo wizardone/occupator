@@ -1,12 +1,13 @@
 require 'occupator/version'
 require 'occupator/config'
+require 'occupator/store'
 require 'occupator/event'
 require 'byebug'
 
 module Occupator
 
   class << self
-    attr_accessor :configuration
+    attr_accessor :configuration, :events
     def configuration
       configuration ||= Occupator::Config.new
     end
@@ -23,10 +24,13 @@ module Occupator
     at = options[:at] || '12.00'
     call_method = Occupator.configuration.call_method || options[:method]
 
-    Occupator::Event.new(every: every,
-                         at: at,
-                         method: call_method)
-
+    Occupator::Store[every] = Occupator::Event.new(every: every,
+                                                   at: at,
+                                                   method: call_method)
     public_send(call_method, every, at) if respond_to?(call_method)
+  end
+
+  def dump
+    Occupator
   end
 end

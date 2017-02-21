@@ -29,11 +29,12 @@ module Occupator
         }
       end
 
-      def dump
+      def dump(period = :all)
         ''.tap do |dump_string|
-          @@events.each do |event|
-
-            dump_string << "Event: Every #{event.every} at #{event.at} \n"
+          (period == :all ? events : events.select { |k, _v| k.to_sym == period}).each do |key, event|
+            next if event.empty?
+            event = event.first
+            dump_string << %Q{Event: Every #{event.every} at #{event.at} /n}
           end
         end
       end

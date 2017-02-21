@@ -61,4 +61,15 @@ describe Occupator::Store do
       end
     end
   end
+
+  describe '.dump' do
+    it 'dumps the event information in a human readable form' do
+      event1 = Occupator::Event.new(every: :day, at: :noon, method: :call)
+      event2 = Occupator::Event.new(every: :week, at: :noon, method: :call)
+      subject[:day] = event1
+      subject[:week] = event2
+
+      expect(subject.dump).to eq('Event: Every day at noon /nEvent: Every week at noon /n')
+    end
+  end
 end
