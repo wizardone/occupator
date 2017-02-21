@@ -31,6 +31,6 @@ module Occupator
   end
 
   def dump
-    Occupator
+    Occupator::Store.dump
   end
 end
