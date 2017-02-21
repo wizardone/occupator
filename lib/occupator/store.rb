@@ -3,7 +3,12 @@ module Occupator
   class Store
     include Singleton
 
-    @@events = {}
+    @@events = {
+      hour: [],
+      day: [],
+      week: [],
+      month: []
+    }
 
     class << self
 
@@ -12,7 +17,7 @@ module Occupator
       end
 
       def []=(period, event)
-        events[period] = event
+        events[period] << event
       end
 
       def dump
