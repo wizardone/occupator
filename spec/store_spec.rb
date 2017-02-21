@@ -9,17 +9,56 @@ describe Occupator::Store do
     }.to raise_error(NoMethodError)
   end
 
+  before { subject.clear }
+
   describe '.events' do
     it 'returns an empty hash of events' do
-      expect(subject.events).to eq({})
+      expect(subject.events).to eq(hour: [], day: [], week: [], month: [])
     end
 
-    it 'returns a hash of events if any are present' do
-      event = Occupator::Event.new(every: :day, at: :noon, method: :call)
-      subject.events[:day] = event
+    context 'single recurring event' do
+      it 'returns the events that occur every day' do
+        event = Occupator::Event.new(every: :day, at: :noon, method: :call)
+        subject[:day] = event
 
-      expect(subject.events).to_not be_empty
-      expect(subject.events).to eq(day: event)
+        expect(subject.events).to_not be_empty
+        expect(subject.events[:day]).to eq([event])
+      end
+
+      it 'returns the events that occur every week' do
+        event = Occupator::Event.new(every: :week, at: :noon, method: :call)
+        subject[:week] = event
+
+        expect(subject.events).to_not be_empty
+        expect(subject.events[:week]).to eq([event])
+      end
+
+      it 'returns the events that occur every month' do
+        event = Occupator::Event.new(every: :month, at: :noon, method: :call)
+        subject[:month] = event
+
+        expect(subject.events).to_not be_empty
+        expect(subject.events[:month]).to eq([event])
+      end
+
+      it 'returns the events that occur every hour' do
+        event = Occupator::Event.new(every: :hour, at: :noon, method: :call)
+        subject[:hour] = event
+
+        expect(subject.events).to_not be_empty
+        expect(subject.events[:hour]).to eq([event])
+      end
+    end
+
+    context 'multiple recurring events' do
+      it 'returns a hash with all the events for a given period' do
+        event = Occupator::Event.new(every: :hour, at: :noon, method: :call)
+
+        3.times { |i| subject[:hour] = event }
+
+        expect(subject.events).to_not be_empty
+        expect(subject.events[:hour].length).to eq(3)
+      end
     end
   end
 end
