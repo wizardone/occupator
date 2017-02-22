@@ -69,7 +69,8 @@ describe Occupator::Store do
       subject[:day] = event1
       subject[:week] = event2
 
-      expect(subject.dump).to eq('Event: Every day at noon /nEvent: Every week at noon /n')
+      expect(subject.dump)
+        .to eq('Event: Class , Every day, At noon /nEvent: Class , Every week, At noon /n')
     end
   end
 end

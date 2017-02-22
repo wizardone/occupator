@@ -26,6 +26,7 @@ module Occupator
 
     Occupator::Store[every] = Occupator::Event.new(every: every,
                                                    at: at,
+                                                   klass: self,
                                                    method: call_method)
     public_send(call_method, every, at) if respond_to?(call_method)
   end

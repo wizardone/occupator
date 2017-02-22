@@ -54,7 +54,9 @@ RSpec.describe Occupator do
 
     it 'creates a new event' do
       args = { every: :day, at: '00.00' }
-      expect(Occupator::Event).to receive(:new).with(args.merge(method: :call))
+      expect(Occupator::Event)
+        .to receive(:new)
+        .with(args.merge(method: :call, klass: subject))
 
       subject.occupy(args)
     end
