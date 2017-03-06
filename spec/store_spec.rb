@@ -64,13 +64,15 @@ describe Occupator::Store do
 
   describe '.dump' do
     it 'dumps the event information in a human readable form' do
-      event1 = Occupator::Event.new(every: :day, at: :noon, method: :call)
-      event2 = Occupator::Event.new(every: :week, at: :noon, method: :call)
+      RecurringEvent = Object.new
+
+      event1 = Occupator::Event.new(every: :day, at: :noon, method: :call, klass: RecurringEvent)
+      event2 = Occupator::Event.new(every: :week, at: :noon, method: :call, klass: RecurringEvent)
       subject[:day] = event1
       subject[:week] = event2
 
       expect(subject.dump)
-        .to eq('Event: Class , Every day, At noon \nEvent: Class , Every week, At noon \n')
+        .to eq(%Q{Event: Object, Every day, At noon \nEvent: Object, Every week, At noon \n})
     end
   end
 end

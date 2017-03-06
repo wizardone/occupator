@@ -34,7 +34,7 @@ module Occupator
           (period == :all ? events : events.select { |k, _v| k.to_sym == period}).each do |key, event|
             next if event.empty?
             event = event.first
-            dump_string << %Q{Event: Class #{event.klass}, Every #{event.every}, At #{event.at} \n}
+            dump_string << %Q{Event: #{event.klass.class}, Every #{event.every}, At #{event.at} \n}
           end
         end
       end
