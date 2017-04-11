@@ -1,6 +1,7 @@
 # Occupator
 
-Occupator is a gem, handling recurring events in Ruby
+Occupator is a gem, handling recurring events in Ruby. It gives you a
+comprehensive structure and an easy DSL.
 
 ## Installation
 
@@ -20,8 +21,8 @@ Or install it yourself as:
 
 ## Usage
 
-Events are defined as POROs, responding to the method `call` or any
-other of your choosing. So you can have something like:
+Events can be defined as POROs or other ruby object that responds to `call`.
+So you can have something like:
 ```ruby
 class EventObject
   include Occupator
@@ -30,6 +31,10 @@ class EventObject
     #perform any recurring action
   end
 end
+```
+or
+```ruby
+RecurringEvent = -> () { 'some reccuring event' }
 ```
 You can list all your events in a single file (or whatever you choose),
 where they can be evaluated during run time (a config file or an
@@ -48,6 +53,7 @@ Occupator.configure do |config|
   config.default_at = '06.00'
   config.call_method = :call
   config.some_option = :blah
+  config.dump_style = String
 end
 ```
 ## Development

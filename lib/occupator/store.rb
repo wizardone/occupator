@@ -1,4 +1,5 @@
 require 'singleton'
+
 module Occupator
   class Store
     include Singleton
