@@ -31,12 +31,18 @@ module Occupator
 
       def dump(period = :all)
         ''.tap do |dump_string|
-          (period == :all ? events : events.select { |k, _v| k.to_sym == period}).each do |key, event|
+          (period == :all ? events : events_for(period)).each do |key, event|
             next if event.empty?
             event = event.first
             dump_string << %Q{Event: #{event.klass.class}, Every #{event.every}, At #{event.at} \n}
           end
         end
+      end
+
+      private
+
+      def events_for(period)
+        events.select { |k, _v| k.to_sym == period}
       end
     end
   end
