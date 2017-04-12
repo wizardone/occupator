@@ -23,12 +23,9 @@ module Occupator
     every = options[:every] || :day
     at = options[:at] || '12.00'
     call_method = Occupator.configuration.call_method || options[:method]
+    Occupator::Event.new(every: every, at: at, klass: self, method: call_method).register
 
-    Occupator::Store[every] = Occupator::Event.new(every: every,
-                                                   at: at,
-                                                   klass: self,
-                                                   method: call_method)
-    public_send(call_method, every, at) if respond_to?(call_method)
+    #public_send(call_method, every, at) if respond_to?(call_method)
   end
 
   def dump

@@ -48,6 +48,7 @@ RSpec.describe Occupator do
     end
 
     it 'invokes the callable method in the event class' do
+      skip
       expect(subject).to receive(:call).with(:day, '00.00')
 
       subject.occupy(every: :day, at: '00.00')
@@ -55,9 +56,12 @@ RSpec.describe Occupator do
 
     it 'creates a new event' do
       args = { every: :day, at: '00.00' }
+      event = double(Occupator::Event)
       expect(Occupator::Event)
         .to receive(:new)
         .with(args.merge(method: :call, klass: subject))
+        .and_return(event)
+      expect(event).to receive(:register)
 
       subject.occupy(args)
     end

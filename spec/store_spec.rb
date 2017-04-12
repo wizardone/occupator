@@ -82,7 +82,7 @@ describe Occupator::Store do
       Occupator.configure { |config| config.dump_style = :hash }
 
       expect(subject.dump).to eq(event1.uuid => { every: event1.every, at: event1.at, klass: event1.klass },
-                                 event2.uuid => { every: event2.every, at: event2.at, klass: event2.klass})
+                                 event2.uuid => { every: event2.every, at: event2.at, klass: event2.klass })
     end
   end
 end
