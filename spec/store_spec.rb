@@ -63,16 +63,26 @@ describe Occupator::Store do
   end
 
   describe '.dump' do
-    it 'dumps the event information in a human readable form' do
+    let(:event1) { Occupator::Event.new(every: :day, at: :noon, method: :call, klass: RecurringEvent) }
+    let(:event2) { Occupator::Event.new(every: :week, at: :noon, method: :call, klass: RecurringEvent) }
+
+    before do
       RecurringEvent = Object.new
 
-      event1 = Occupator::Event.new(every: :day, at: :noon, method: :call, klass: RecurringEvent)
-      event2 = Occupator::Event.new(every: :week, at: :noon, method: :call, klass: RecurringEvent)
       subject[:day] = event1
       subject[:week] = event2
+    end
 
+    it 'dumps the event information in string form' do
       expect(subject.dump)
         .to eq(%Q{Event: Object, Every day, At noon \nEvent: Object, Every week, At noon \n})
+    end
+
+    it 'dumps the event information in hash form' do
+      Occupator.configure { |config| config.dump_style = :hash }
+
+      expect(subject.dump).to eq(event1.uuid => { every: event1.every, at: event1.at, klass: event1.klass },
+                                 event2.uuid => { every: event2.every, at: event2.at, klass: event2.klass})
     end
   end
 end

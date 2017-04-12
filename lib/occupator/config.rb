@@ -5,7 +5,7 @@ module Occupator
     def initialize
       @default_at = '12.00'
       @call_method = :call
-      @dump_style = String
+      @dump_style = :string
     end
   end
 end

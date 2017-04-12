@@ -7,15 +7,15 @@ require 'byebug'
 module Occupator
 
   class << self
-    attr_accessor :configuration, :events
-    def configuration
-      configuration ||= Occupator::Config.new
-    end
+    attr_accessor :configuration
 
     def configure
-      raise 'You must supply a block with config options' unless block_given?
-
+      raise 'No configuration block supplied' unless block_given?
       yield configuration
+    end
+
+    def configuration
+      @configuration ||= Occupator::Config.new
     end
   end
 
