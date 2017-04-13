@@ -18,8 +18,9 @@ module Occupator
       end
 
       def []=(period, event)
-        events[period.to_sym] << event
+        events[period] << event
       end
+
 
       def clear
         @@events = {
@@ -56,14 +57,9 @@ module Occupator
 
       def dump_hash_for(period)
         {}.tap do |dump_hash|
-          (period == :all ? events : events_for(period)).each do |key, event|
-            next if event.empty?
-            event = event.first
-            dump_hash[event.uuid] = {
-              every: event.every,
-              at: event.at,
-              klass: event.klass
-            }
+          (period == :all ? events : events_for(period)).each do |key, events|
+            next if events.empty?
+            dump_hash[key] = events.map(&:to_hash)
           end
         end
       end

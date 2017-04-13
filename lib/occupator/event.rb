@@ -16,6 +16,15 @@ module Occupator
       Occupator::Store.events[every] = self
     end
 
+    def to_hash
+      {
+        uuid: uuid,
+        at: at,
+        klass: klass,
+        every: every
+      }
+    end
+
     def next
 
     end
