@@ -17,7 +17,7 @@ describe Occupator::Event do
     it 'registers the event in the store' do
       event = subject.new(every: :day, at: :noon)
 
-      expect(Occupator::Store).to receive(:events).with(event.every)
+      expect(Occupator::Store.events).to receive(:[]=).with(:day, event)
 
       event.register
     end

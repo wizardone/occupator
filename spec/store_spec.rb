@@ -83,8 +83,9 @@ describe Occupator::Store do
       Occupator.configure { |config| config.dump_style = :hash }
 
       expect(subject.dump).to eq(
-        { day: [{ uuid: event1.uuid, at: event1.at, klass: event1.klass }, { uuid: event3.uuid, at: event3.at, klass: event3.klass }],
-          week: [{ uuid: event2.uuid, at: event2.at, klass: event2.klass }]
+        { day: [{ uuid: event1.uuid, at: event1.at, klass: event1.klass, every: event1.every },
+                { uuid: event3.uuid, at: event3.at, klass: event3.klass, every: event3.every }],
+          week: [{ uuid: event2.uuid, at: event2.at, klass: event2.klass, every: event2.every }]
         }
       )
     end
