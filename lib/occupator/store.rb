@@ -31,7 +31,7 @@ module Occupator
         }
       end
 
-      def dump(period = :all)
+      def dump(period)
         if Occupator.configuration.dump_style == :string
           dump_string_for(period)
         elsif Occupator.configuration.dump_style == :hash

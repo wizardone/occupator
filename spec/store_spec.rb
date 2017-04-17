@@ -75,14 +75,14 @@ describe Occupator::Store do
     end
 
     it 'dumps the event information in string form' do
-      expect(subject.dump)
+      expect(subject.dump(:all))
         .to eq(%Q{Event: Object, Every day, At noon \nEvent: Object, Every week, At noon \n})
     end
 
     it 'dumps the event information in hash form' do
       Occupator.configure { |config| config.dump_style = :hash }
 
-      expect(subject.dump).to eq(
+      expect(subject.dump(:all)).to eq(
         { day: [{ uuid: event1.uuid, at: event1.at, klass: event1.klass, every: event1.every },
                 { uuid: event3.uuid, at: event3.at, klass: event3.klass, every: event3.every }],
           week: [{ uuid: event2.uuid, at: event2.at, klass: event2.klass, every: event2.every }]

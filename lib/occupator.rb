@@ -28,7 +28,7 @@ module Occupator
     #public_send(call_method, every, at) if respond_to?(call_method)
   end
 
-  def dump
-    Occupator::Store.dump
+  def dump(period = :all)
+    Occupator::Store.dump(period)
   end
 end
